@@ -1,5 +1,6 @@
 package com.kmarzecki.communicator.model;
 
+import com.kmarzecki.communicator.model.auth.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,6 +26,9 @@ public class BoardEntity {
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
     private String name;
+    @ManyToMany
+    private List<UserEntity> users;
+
     @OneToMany
     private List<LaneEntity> lanes;
 }
