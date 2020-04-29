@@ -11,15 +11,15 @@ import javax.persistence.*
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-class CardTaskEntity {
-    @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "id", updatable = false, nullable = false)
-    private val id: UUID? = null
-    private val text: String? = null
-    private val isComplete = false
+data class CardTaskEntity(
+        @Id
+        @GeneratedValue(generator = "UUID")
+        @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+        @Column(name = "id", updatable = false, nullable = false)
+        val id: UUID? = null,
+        var text: String,
+        var isComplete: Boolean = false,
+        @ManyToOne
+        val card: CardEntity
 
-    @ManyToOne
-    private val card: CardEntity? = null
-}
+)

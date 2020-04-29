@@ -8,5 +8,5 @@ interface BoardRepository : JpaRepository<BoardEntity?, UUID?> {
     fun existsByNameAndUsers_Username(name: String, users_username: String): Boolean
     fun findAllByUsers_Username(users_username: String): List<BoardEntity>
     fun deleteAlLByIdAndUsers_Username(id: UUID, users_username: String)
-    fun existsByIdAndUsers_Username(id: UUID, users_username: String)
+    fun existsByIdAndUsers_Username(id: UUID, users_username: String): Boolean
 }

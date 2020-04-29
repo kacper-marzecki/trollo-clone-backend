@@ -49,20 +49,25 @@ class BoardServiceImpl(
     }
 
     override fun update(request: UpdateBoardRequest, id: UUID, principal: Principal): BoardResponse {
-        return BoardResponse (UUID.fromString("stub"), "stub")
+        return BoardResponse(UUID.fromString("stub"), "stub")
     }
 
     override fun getLanesForBoard(boardId: UUID, principal: Principal): List<LaneResponse> {
-        if(!repository.existsByIdAndUsers_Username(boardId, principal.name)) {
+        if (!repository.existsByIdAndUsers_Username(boardId, principal.name)) {
             throw OperationNotPermittedException("Not your board m8")
         }
         return laneRepository.findAllByBoard_Id(boardId)
                 .map {
                     LaneResponse(
                             id = it.id!!,
-                            name: it.nam,
-                            positionInBoard
+                            name = it.name,
+                            positionInBoard = it.positionInBoard
                     )
                 }
     }
+
+    override fun hasAccessToBoard(
+            boardId: UUID,
+            principal: Principal
+    ) = repository.existsByIdAndUsers_Username(boardId, principal.name)
 }

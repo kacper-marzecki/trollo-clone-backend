@@ -13,4 +13,5 @@ interface BoardService {
     fun deleteBoard(boardId: UUID, principal: Principal)
     fun update(request: UpdateBoardRequest, id: UUID, principal: Principal): BoardResponse
     fun getLanesForBoard(boardId: UUID, principal: Principal): List<LaneResponse>
+    fun hasAccessToBoard(boardId: UUID, principal: Principal): Boolean
 }
